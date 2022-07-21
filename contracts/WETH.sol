@@ -4,7 +4,7 @@ pragma solidity ^0.8.13;
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "@openzeppelin/contracts/utils/Context.sol";
 
-contract WETH is ERC20 {
+contract WETH is Context, ERC20 {
     event Deposit(address indexed account, uint amount);
     event Withdraw(address indexed account, uint amount);
 

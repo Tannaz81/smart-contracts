@@ -4,7 +4,7 @@ pragma solidity ^0.8.13;
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/utils/Context.sol";
 
-contract Vault {
+contract Vault is Context{
     IERC20 public immutable token;
 
     uint public totalsupply;
