@@ -2,6 +2,7 @@
 pragma solidity ^0.8.13;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/utils/Context.sol";
 
 contract Vault {
     IERC20 public immutable token;
@@ -40,8 +41,8 @@ contract Vault {
             shares = (_amount * totalsupply) / token.balanceOf(address(this));
         }
 
-        _mint(msg.sender, shares);
-        token.transferFrom(msg.sender, address(this), _amount);
+        _mint(_msgSender(), shares);
+        token.transferFrom(_msgSender(), address(this), _amount);
     }
 
     function withdraw(uint _shares) external {
@@ -54,8 +55,8 @@ contract Vault {
         a = sB / T
         */
         uint amount = (_shares * token.balanceOf(address(this))) / totalsupply;
-        _burn(msg.sender, _shares);
-        token.transfer(msg.sender, amount);
+        _burn(_msgSender(), _shares);
+        token.transfer(_msgSender(), amount);
 
 
     }

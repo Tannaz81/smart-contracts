@@ -2,6 +2,7 @@
 pragma solidity ^0.8.13;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/utils/Context.sol";
 
 contract WETH is ERC20 {
     event Deposit(address indexed account, uint amount);
@@ -14,13 +15,13 @@ contract WETH is ERC20 {
     }
 
     function deposit () public payable {
-        _mint(msg.sender, msg.value);
-        emit Deposit(msg.sender, msg.value);
+        _mint(_msgSender(), msg.value);
+        emit Deposit(_msgSender(), msg.value);
     }
 
     function withdraw (uint _amount) external {
-        _burn(msg.sender, _amount);
-        payable(msg.sender).transfer(_amount);
-        emit Withdraw(msg.sender, _amount);
+        _burn(_msgSender(), _amount);
+        payable(_msgSender()).transfer(_amount);
+        emit Withdraw(_msgSender(), _amount);
     }
 }
